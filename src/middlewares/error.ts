@@ -10,7 +10,7 @@ const errorMiddleware = (
 ) => {
   err.message ||= "Internal server error";
   err.statusCode ||= 500;
-  err.details ||= null;
+  err.details ||= undefined;
 
   if (err.name === "CastError") err.message = "Invalid Id";
 

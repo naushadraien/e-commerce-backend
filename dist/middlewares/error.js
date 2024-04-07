@@ -1,7 +1,7 @@
 const errorMiddleware = (err, req, res, next) => {
     err.message || (err.message = "Internal server error");
     err.statusCode || (err.statusCode = 500);
-    err.details || (err.details = null);
+    err.details || (err.details = undefined);
     if (err.name === "CastError")
         err.message = "Invalid Id";
     return res.status(err.statusCode).json({
