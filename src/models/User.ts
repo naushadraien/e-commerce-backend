@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { UserType } from "../types/types.js";
+import mongoose from 'mongoose';
+import { UserType } from '../types/types.js';
 
 const userSchema = new mongoose.Schema(
   {
@@ -18,17 +18,16 @@ const userSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      default:
-        "https://img.freepik.com/premium-vector/account-icon-user-icon-vector-graphics_292645-552.jpg?w=740",
+      default: 'https://img.freepik.com/premium-vector/account-icon-user-icon-vector-graphics_292645-552.jpg?w=740',
     },
     role: {
       type: String,
-      enum: ["user", "admin"],
-      default: "user",
+      enum: ['user', 'admin'],
+      default: 'user',
     },
   },
   { timestamps: true },
 );
 
-const User = mongoose.model<UserType>("User", userSchema);
+const User = mongoose.model<UserType>('User', userSchema);
 export default User;

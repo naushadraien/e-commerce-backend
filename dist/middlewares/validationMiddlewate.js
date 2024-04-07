@@ -1,5 +1,5 @@
-import { ZodError } from "zod";
-import ErrorHandler from "../utils/utility-class.js";
+import { ZodError } from 'zod';
+import ErrorHandler from '../utils/utility-class.js';
 export function validateData(schema) {
     return (req, res, next) => {
         try {
@@ -14,7 +14,7 @@ export function validateData(schema) {
                 //   message: `${issue.path.join(".")} is ${issue.message}`,
                 // }));
                 // Create a new ErrorHandler with the error messages
-                const err = new ErrorHandler("Invalid data", 400, errorMessages);
+                const err = new ErrorHandler('Invalid data', 400, errorMessages);
                 next(err);
             }
             else {
