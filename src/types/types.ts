@@ -12,3 +12,8 @@ export interface UserType extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CustomRequest<T> extends Request {
+  user?: UserType;
+  body: T;
+}

@@ -17,3 +17,10 @@ export const userLoginSchema = z.object({
         message: 'Please enter a password that is at least 8 characters long.',
     }),
 });
+export const userUpdateSchema = z.object({
+    name: z.string(),
+    password: z.string().min(8, {
+        message: 'Please enter a password that is at least 8 characters long.',
+    }),
+    imageUrl: z.string(),
+});
