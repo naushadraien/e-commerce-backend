@@ -121,4 +121,27 @@ const updateUserRole = TryCatch(async (req, res, next) => {
         user,
     });
 });
-export { loggedInUser, logOutUser, newUser, updateUser, getAllUsers, updateUserRole };
+const adminLogin = TryCatch(async (req, res, next) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return next(new ErrorHandler('All fields are required', 400));
+    }
+    const user = await User.findOne({ email });
+    const validPassword = bcrypt.compareSync(password, user?.password);
+    if (!validPassword) {
+        return next(new ErrorHandler('Invalid credentials', 401));
+    }
+    if (!user) {
+        return next(new ErrorHandler('Admin not found', 404));
+    }
+    if (user.role !== 'admin') {
+        return next(new ErrorHandler('Unauthorized', 401));
+    }
+    generateToken(res, user._id);
+    return res.status(200).json({
+        success: true,
+        message: `Welcome back ${user.name}`,
+        user,
+    });
+});
+export { loggedInUser, logOutUser, newUser, updateUser, getAllUsers, updateUserRole, adminLogin };
