@@ -11,4 +11,10 @@ const authenticateUser = TryCatch(async (req, res, next) => {
     req.user = (await User.findById(decodedUser.userId).select('-password'));
     next();
 });
-export { authenticateUser };
+const authorizeAdmin = TryCatch(async (req, res, next) => {
+    if (req.user?.role !== 'admin') {
+        return next(new ErrorHandler('Not Authorized as admin!', 401));
+    }
+    next();
+});
+export { authenticateUser, authorizeAdmin };

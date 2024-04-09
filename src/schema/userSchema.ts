@@ -26,3 +26,14 @@ export const userUpdateSchema = z.object({
   }),
   imageUrl: z.string(),
 });
+export const userUpdateRoleSchema = z.object({
+  // role: z
+  //   .string({
+  //     required_error: 'Name is required',
+  //     invalid_type_error: 'Name must be a string',
+  //   })
+  //   .min(2, {
+  //     message: 'Role must be at least 2 characters',
+  //   }),
+  role: z.enum(['user', 'admin']),
+});

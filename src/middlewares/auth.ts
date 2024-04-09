@@ -15,4 +15,11 @@ const authenticateUser = TryCatch(async (req: CustomRequest<UserType>, res, next
   next();
 });
 
-export { authenticateUser };
+const authorizeAdmin = TryCatch(async (req: CustomRequest<UserType>, res, next) => {
+  if (req.user?.role !== 'admin') {
+    return next(new ErrorHandler('Not Authorized as admin!', 401));
+  }
+  next();
+});
+
+export { authenticateUser, authorizeAdmin };
